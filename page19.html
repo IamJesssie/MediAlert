@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Takeaways - MediAlert Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .slide {
+            min-height: 930px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #740510 0%, #8a0613 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+            color: white;
+        }
+        
+        .logo-shield {
+            width: 60px;
+            height: 70px;
+            transform: matrix(1.91, 0, 0, 1.91, 0, 0);
+            bottom: -5px !important;
+            left: -16px !important;
+            position: relative !important;
+        }
+        
+        .logo-cross {
+            position: absolute;
+            background-color: #f8d167;
+        }
+        
+        .logo-cross-vertical {
+            width: 7px;
+            height: 35px;
+        }
+        
+        .logo-cross-horizontal {
+            width: 35px;
+            height: 7px;
+        }
+        
+        .header {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px 60px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pattern-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(248, 209, 103, 0.1) 10%, transparent 11%);
+            background-size: 30px 30px;
+            opacity: 0.6;
+            z-index: 1;
+        }
+        
+        .slide-content {
+            padding: 40px 60px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .takeaway-card {
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #f8d167;
+            animation: fadeInUp 0.7s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .takeaway-card:hover {
+            background-color: rgba(248, 209, 103, 0.15);
+            transform: translateY(-5px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .takeaway-card:nth-child(1) { animation-delay: 0.1s; }
+        .takeaway-card:nth-child(2) { animation-delay: 0.2s; }
+        .takeaway-card:nth-child(3) { animation-delay: 0.3s; }
+        .takeaway-card:nth-child(4) { animation-delay: 0.4s; }
+        
+        .question-card {
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            animation: fadeInRight 0.7s ease forwards;
+            opacity: 0;
+            transform: translateX(20px);
+            border-left: 4px solid #f8d167;
+        }
+        
+        .question-card-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(248, 209, 103, 0.3);
+            background-color: rgba(248, 209, 103, 0.15);
+            display: flex;
+            align-items: center;
+        }
+        
+        .question-card-body {
+            padding: 16px;
+        }
+        
+        @keyframes fadeInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .question-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 14px;
+            padding: 12px;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .question-item:hover {
+            background-color: rgba(248, 209, 103, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .question-item:nth-child(1) { animation-delay: 0.6s; }
+        .question-item:nth-child(2) { animation-delay: 0.7s; }
+        .question-item:nth-child(3) { animation-delay: 0.8s; }
+        
+        .icon-container {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(248, 209, 103, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 14px;
+            color: #f8d167;
+            flex-shrink: 0;
+            font-size: 1.5rem;
+        }
+        
+        .small-icon {
+            width: 36px;
+            height: 36px;
+            background-color: rgba(248, 209, 103, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 14px;
+            color: #f8d167;
+            flex-shrink: 0;
+        }
+        
+        .medical-icon {
+            position: absolute;
+            color: rgba(248, 209, 103, 0.1);
+            z-index: 1;
+        }
+        
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .presenter-badge {
+            position: absolute;
+            top: 20px;
+            right: 60px;
+            background-color: rgba(248, 209, 103, 0.2);
+            color: #f8d167;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+            animation-delay: 0.9s;
+        }
+        
+        .highlight {
+            color: #f8d167;
+            font-weight: 600;
+        }
+        
+        .qr-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            background-color: white;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid #f8d167;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+            animation-delay: 1s;
+        }
+        
+        .qr-placeholder {
+            width: 120px;
+            height: 120px;
+            background-color: #f5f5f5;
+            position: relative;
+        }
+        
+        .qr-line {
+            position: absolute;
+            background-color: #740510;
+        }
+        
+        .qr-line-h1 { width: 100%; height: 10px; top: 25px; left: 0; }
+        .qr-line-h2 { width: 100%; height: 10px; top: 55px; left: 0; }
+        .qr-line-h3 { width: 100%; height: 10px; top: 85px; left: 0; }
+        
+        .qr-line-v1 { width: 10px; height: 100%; top: 0; left: 25px; }
+        .qr-line-v2 { width: 10px; height: 100%; top: 0; left: 55px; }
+        .qr-line-v3 { width: 10px; height: 100%; top: 0; left: 85px; }
+        
+        .qr-square {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #740510;
+        }
+        
+        .qr-square-1 { top: 10px; left: 10px; }
+        .qr-square-2 { top: 10px; right: 10px; }
+        .qr-square-3 { bottom: 10px; left: 10px; }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="pattern-bg"></div>
+        
+        <i class="fas fa-stethoscope medical-icon text-9xl" style="top: 120px; right: 150px;"></i>
+        <i class="fas fa-heartbeat medical-icon text-8xl" style="bottom: 180px; right: 200px;"></i>
+        <i class="fas fa-hand-holding-medical medical-icon text-8xl" style="bottom: 80px; right: 80px;"></i>
+        
+        <div class="header">
+            <div class="logo-shield">
+                <img src="MediAlert.png" alt="MediAlert Logo" class="object-contain w-full h-full">
+            </div>
+            <h1 class="text-3xl font-bold" style="color: #f8d167;">Key Takeaways & Q&A</h1>
+        </div>
+        
+        <div class="presenter-badge">
+            <i class="fas fa-user-tie mr-2"></i>
+            Presenter: Jose Raphael R. Lawas
+        </div>
+        
+        <div class="slide-content">
+            <div class="grid grid-cols-2 gap-10">
+                <div>
+                    <h2 class="text-2xl font-semibold mb-4" style="color: #f8d167;">Key Takeaways</h2>
+                    
+                    <div class="takeaway-card">
+                        <div class="flex items-start">
+                            <div class="icon-container">
+                                <i class="fas fa-puzzle-piece"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium mb-2" style="color: #f8d167;">Addressing a Critical Need</h3>
+                                <p class="text-sm">MediAlert provides immediate access to critical medical information during emergencies, potentially saving lives through faster and more appropriate treatment.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="takeaway-card">
+                        <div class="flex items-start">
+                            <div class="icon-container">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium mb-2" style="color: #f8d167;">Security & Privacy By Design</h3>
+                                <p class="text-sm">Our solution incorporates robust security measures and compliance with data privacy regulations to protect sensitive medical information.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="takeaway-card">
+                        <div class="flex items-start">
+                            <div class="icon-container">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium mb-2" style="color: #f8d167;">Broad Accessibility</h3>
+                                <p class="text-sm">The affordable and user-friendly design ensures accessibility to all individuals regardless of technological proficiency or socioeconomic status.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="takeaway-card">
+                        <div class="flex items-start">
+                            <div class="icon-container">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium mb-2" style="color: #f8d167;">Future-Ready Platform</h3>
+                                <p class="text-sm">MediAlert establishes the foundation for future enhancements including mobile applications, hospital system integration, and expanded functionality.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="question-card" style="animation-delay: 0.5s;">
+                        <div class="question-card-header">
+                            <div class="small-icon mr-3">
+                                <i class="fas fa-question"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold" style="color: #f8d167;">Q&A Session</h3>
+                        </div>
+                        <div class="question-card-body">
+                            <div class="question-item">
+                                <div class="small-icon">
+                                    <i class="fas fa-key"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-base font-medium mb-1" style="color: #f8d167;">How is patient data secured?</h4>
+                                    <p class="text-xs">MediAlert employs end-to-end encryption, secure authentication protocols, and role-based access controls to protect sensitive medical information.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="question-item">
+                                <div class="small-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-base font-medium mb-1" style="color: #f8d167;">What is the implementation timeline?</h4>
+                                    <p class="text-xs">Initial launch in April 2025, with pilot deployment followed by full rollout. Future enhancements are planned over the subsequent 24 months.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="question-item">
+                                <div class="small-icon">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-base font-medium mb-1" style="color: #f8d167;">What is the total budget requirement?</h4>
+                                    <p class="text-xs">Total project budget is PHP 1,720,900 with a contingency reserve of PHP 180,900 (10%).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                  
+                </div>
+            </div>
+            
+            <div class="mt-4 bg-black bg-opacity-20 p-4 rounded-lg" style="animation: fadeIn 1s ease forwards; opacity: 0; animation-delay: 1.1s;">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <i class="fas fa-lightbulb text-2xl mr-3" style="color: #f8d167;"></i>
+                        <p class="text-sm">MediAlert represents not just a technological solution, but a transformative approach to emergency medical care that can make a significant difference in treatment outcomes.</p>
+                    </div>
+                    <div class="hidden md:block">
+                        <i class="fas fa-heartbeat text-3xl" style="color: #f8d167;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-number">19 / 20</div>
+    </div>
+</body>
+</html>

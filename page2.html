@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediAlert Presentation - Agenda</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        body {
+            width: 1905px;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .slide {
+            
+            min-height: 720px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #740510 0%, #8a0613 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+            color: white;
+        }
+        
+        .logo-shield {
+            width: 60px;
+            height: 70px;
+            transform: matrix(1.91, 0, 0, 1.91, 0, 0);
+            bottom: -12px !important;
+            left: -16px !important;
+            position: relative !important;
+        }
+        
+       
+        
+        .header {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px 60px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .accent-line {
+            height: 4px;
+            width: 100px;
+            background: #f8d167;
+            border-radius: 2px;
+            margin: 12px 0;
+        }
+        
+        .pattern-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(248, 209, 103, 0.1) 10%, transparent 11%);
+            background-size: 30px 30px;
+            opacity: 0.6;
+            z-index: 1;
+        }
+        
+        .presenter-card {
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-left: 4px solid #f8d167;
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.5s ease forwards;
+            opacity: 0;
+            transform: translateX(-20px);
+            display: flex;
+            align-items: center;
+        }
+        
+        @keyframes slideInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .presenter-card:hover {
+            background-color: rgba(248, 209, 103, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .presenter-card:nth-child(1) { animation-delay: 0.1s; }
+        .presenter-card:nth-child(2) { animation-delay: 0.2s; }
+        .presenter-card:nth-child(3) { animation-delay: 0.3s; }
+        .presenter-card:nth-child(4) { animation-delay: 0.4s; }
+        .presenter-card:nth-child(5) { animation-delay: 0.5s; }
+        .presenter-card:nth-child(6) { animation-delay: 0.6s; }
+        .presenter-card:nth-child(7) { animation-delay: 0.7s; }
+        
+        .presenter-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(248, 209, 103, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            color: #f8d167;
+        }
+        
+        .medical-icon {
+            position: absolute;
+            color: rgba(248, 209, 103, 0.1);
+            z-index: 1;
+        }
+        
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .title-animation {
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="pattern-bg"></div>
+        
+        <i class="fas fa-heartbeat medical-icon text-9xl" style="top: 180px; right: 120px;"></i>
+        <i class="fas fa-pills medical-icon text-8xl" style="bottom: 220px; right: 200px;"></i>
+        <i class="fas fa-hospital medical-icon text-9xl" style="bottom: 100px; right: 100px;"></i>
+        
+        <div class="header">
+            <div class="logo-shield">
+                <img src="MediAlert.png" alt="MediAlert Logo" class="object-contain w-full h-full">
+            </div>
+            <h1 class="text-3xl font-bold" style="color: #f8d167;">Presentation Overview</h1>
+        </div>
+        
+        <div class="p-12 relative z-10">
+            <h2 class="text-2xl font-semibold mb-2 title-animation">MediAlert: Project Management Plan</h2>
+            
+            <div class="accent-line title-animation" style="animation-delay: 0.3s;"></div>
+            
+            <div class="mt-8 grid grid-cols-1 gap-3">
+                <div class="presenter-card">
+                    <div class="presenter-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center mb-1">
+                            <h3 class="text-xl font-medium" style="color: #f8d167;">Project Charter & Overview</h3>
+                        </div>
+                        <p class="text-sm text-white opacity-90">Project vision, purpose, and business case</p>
+                        <p class="text-xs mt-1 text-white opacity-70">Presenter: Jose Raphael R. Lawas (Project Manager)</p>
+                    </div>
+                </div>
+                
+                <div class="presenter-card">
+                    <div class="presenter-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center mb-1">
+                            <h3 class="text-xl font-medium" style="color: #f8d167;">Introduction & Project Approach</h3>
+                        </div>
+                        <p class="text-sm text-white opacity-90">Need for the project and management methodology</p>
+                        <p class="text-xs mt-1 text-white opacity-70">Presenter: Jessie Noel Lapure (Lead Developer)</p>
+                    </div>
+                </div>
+                
+                <div class="presenter-card">
+                    <div class="presenter-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center mb-1">
+                            <h3 class="text-xl font-medium" style="color: #f8d167;">Project Scope & Schedule</h3>
+                        </div>
+                        <p class="text-sm text-white opacity-90">Included/excluded features and project timeline</p>
+                        <p class="text-xs mt-1 text-white opacity-70">Presenter: Carl Austin T. Labuca (UI/UX Designer)</p>
+                    </div>
+                </div>
+                
+                <div class="presenter-card">
+                    <div class="presenter-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center mb-1">
+                            <h3 class="text-xl font-medium" style="color: #f8d167;">Resources & Cost Management</h3>
+                        </div>
+                        <p class="text-sm text-white opacity-90">Budget, resources, and financial planning</p>
+                        <p class="text-xs mt-1 text-white opacity-70">Presenter: Nathan Xander Lada (Backend Developer)</p>
+                    </div>
+                </div>
+                
+                <div class="presenter-card">
+                    <div class="presenter-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center mb-1">
+                            <h3 class="text-xl font-medium" style="color: #f8d167;">Communications & Procurement</h3>
+                        </div>
+                        <p class="text-sm text-white opacity-90">Stakeholder communications and resource acquisition</p>
+                        <p class="text-xs mt-1 text-white opacity-70">Presenter: John Joseph A. Laborada (Frontend Developer)</p>
+                    </div>
+                </div>
+                
+                <div class="presenter-card">
+                    <div class="presenter-icon">
+                        <i class="fas fa-check-square"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center mb-1">
+                            <h3 class="text-xl font-medium" style="color: #f8d167;">Quality Management</h3>
+                        </div>
+                        <p class="text-sm text-white opacity-90">Quality standards, metrics, and assurance processes</p>
+                        <p class="text-xs mt-1 text-white opacity-70">Presenter: Lyrech James E. Laspinas (QA Specialist)</p>
+                    </div>
+                </div>
+                
+                <div class="presenter-card">
+                    <div class="presenter-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center mb-1">
+                            <h3 class="text-xl font-medium" style="color: #f8d167;">Risk Management</h3>
+                        </div>
+                        <p class="text-sm text-white opacity-90">Risk assessment, mitigation strategies, and risk register</p>
+                        <p class="text-xs mt-1 text-white opacity-70">Presenter: Joshua Noel D. Lo (Security Consultant)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-number">2 / 20</div>
+    </div>
+</body>
+</html>

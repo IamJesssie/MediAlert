@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .slide {
+            
+            min-height: 945px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #740510 0%, #8a0613 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+            color: white;
+        }
+        
+        .logo-shield {
+            width: 60px;
+            height: 70px;
+            transform: matrix(1.91, 0, 0, 1.91, 0, 0);
+            bottom: -5px !important;
+            left: -16px !important;
+            position: relative !important;
+        }
+        
+        .logo-cross {
+            position: absolute;
+            background-color: #f8d167;
+        }
+        
+        .logo-cross-vertical {
+            width: 7px;
+            height: 35px;
+        }
+        
+        .logo-cross-horizontal {
+            width: 35px;
+            height: 7px;
+        }
+        
+        .header {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px 60px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pattern-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(248, 209, 103, 0.1) 10%, transparent 11%);
+            background-size: 30px 30px;
+            opacity: 0.6;
+            z-index: 1;
+        }
+        
+        .slide-content {
+            padding: 40px 60px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .quality-card {
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            border-left: 4px solid #f8d167;
+        }
+        
+        .quality-card-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(248, 209, 103, 0.3);
+            background-color: rgba(248, 209, 103, 0.15);
+            display: flex;
+            align-items: center;
+        }
+        
+        .quality-card-body {
+            padding: 16px;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .quality-card:nth-child(1) { animation-delay: 0.1s; }
+        .quality-card:nth-child(2) { animation-delay: 0.2s; }
+        .quality-card:nth-child(3) { animation-delay: 0.3s; }
+        .quality-card:nth-child(4) { animation-delay: 0.4s; }
+        
+        .quality-card:hover {
+            background-color: rgba(248, 209, 103, 0.15);
+            transition: background-color 0.3s ease;
+        }
+        
+        .quality-metric {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(248, 209, 103, 0.2);
+            animation: fadeInRight 0.5s ease forwards;
+            opacity: 0;
+            transform: translateX(20px);
+            display: flex;
+            align-items: center;
+        }
+        
+        @keyframes fadeInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .quality-metric:hover {
+            background-color: rgba(248, 209, 103, 0.15);
+            transform: scale(1.02);
+            transition: all 0.3s ease;
+        }
+        
+        .quality-metric:nth-child(1) { animation-delay: 0.5s; }
+        .quality-metric:nth-child(2) { animation-delay: 0.6s; }
+        .quality-metric:nth-child(3) { animation-delay: 0.7s; }
+        .quality-metric:nth-child(4) { animation-delay: 0.8s; }
+        .quality-metric:nth-child(5) { animation-delay: 0.9s; }
+        
+        .quality-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(248, 209, 103, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 14px;
+            color: #f8d167;
+            flex-shrink: 0;
+        }
+        
+        .quality-role {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 8px;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .quality-role:hover {
+            background-color: rgba(248, 209, 103, 0.15);
+        }
+        
+        .quality-progress {
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+        
+        .quality-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #f8d167 0%, rgba(248, 209, 103, 0.6) 100%);
+            border-radius: 5px;
+            width: 0;
+            animation: progressFill 1.5s ease forwards;
+            animation-delay: 1s;
+        }
+        
+        @keyframes progressFill {
+            to { width: var(--fill-width); }
+        }
+        
+        .bullet-point {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .bullet-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #f8d167;
+            border-radius: 50%;
+            margin-top: 6px;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        
+        .medical-icon {
+            position: absolute;
+            color: rgba(248, 209, 103, 0.1);
+            z-index: 1;
+        }
+        
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .presenter-badge {
+            position: absolute;
+            top: 20px;
+            right: 60px;
+            background-color: rgba(248, 209, 103, 0.2);
+            color: #f8d167;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+            animation-delay: 0.8s;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .highlight {
+            color: #f8d167;
+            font-weight: 600;
+        }
+        
+        .qa-process-icons {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+            animation-delay: 1s;
+        }
+        
+        .process-icon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px;
+        }
+        
+        .process-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(248, 209, 103, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            color: #f8d167;
+            position: relative;
+        }
+        
+        .process-icon:after {
+            content: '';
+            position: absolute;
+            right: -30px;
+            width: 30px;
+            height: 3px;
+            background-color: rgba(248, 209, 103, 0.4);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .process-icon-container:last-child .process-icon:after {
+            display: none;
+        }
+        
+        .process-name {
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="pattern-bg"></div>
+        
+        <i class="fas fa-clipboard-check medical-icon text-9xl" style="top: 120px; right: 150px;"></i>
+        <i class="fas fa-check-double medical-icon text-8xl" style="bottom: 160px; right: 180px;"></i>
+        <i class="fas fa-award medical-icon text-8xl" style="bottom: 80px; right: 80px;"></i>
+        
+        <div class="header">
+            <div class="logo-shield">
+                <img src="MediAlert.png" alt="MediAlert Logo" class="object-contain w-full h-full">
+            </div>
+            <h1 class="text-3xl font-bold" style="color: #f8d167;">Quality Management</h1>
+        </div>
+        
+        <div class="presenter-badge">
+            <i class="fas fa-check-square mr-2"></i>
+            Presenter: Lyrech James E. Laspinas
+        </div>
+        
+        <div class="slide-content">
+            <div class="grid grid-cols-2 gap-6">
+                <div>
+                    <div class="quality-card">
+                        <div class="quality-card-header">
+                            <div class="quality-icon mr-3">
+                                <i class="fas fa-users-cog"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold" style="color: #f8d167;">Quality Roles & Responsibilities</h3>
+                        </div>
+                        <div class="quality-card-body">
+                            <div class="quality-role">
+                                <div class="quality-icon w-8 h-8 mr-3">
+                                    <i class="fas fa-user-tie text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium" style="color: #f8d167;">Project Manager</p>
+                                    <p class="text-xs">Ensures quality standards are communicated and met</p>
+                                </div>
+                            </div>
+                            <div class="quality-role">
+                                <div class="quality-icon w-8 h-8 mr-3">
+                                    <i class="fas fa-code text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium" style="color: #f8d167;">Technical Lead</p>
+                                    <p class="text-xs">Defines technical standards and oversees code reviews</p>
+                                </div>
+                            </div>
+                            <div class="quality-role">
+                                <div class="quality-icon w-8 h-8 mr-3">
+                                    <i class="fas fa-paint-brush text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium" style="color: #f8d167;">Design Team</p>
+                                    <p class="text-xs">Ensures UI/UX meets usability standards</p>
+                                </div>
+                            </div>
+                            <div class="quality-role">
+                                <div class="quality-icon w-8 h-8 mr-3">
+                                    <i class="fas fa-shield-alt text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium" style="color: #f8d167;">Security Consultant</p>
+                                    <p class="text-xs">Implements security standards and best practices</p>
+                                </div>
+                            </div>
+                            <div class="quality-role">
+                                <div class="quality-icon w-8 h-8 mr-3">
+                                    <i class="fas fa-vial text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium" style="color: #f8d167;">QA Team</p>
+                                    <p class="text-xs">Develops test plans and ensures deliverables meet standards</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quality-card">
+                        <div class="quality-card-header">
+                            <div class="quality-icon mr-3">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold" style="color: #f8d167;">Quality Tools</h3>
+                        </div>
+                        <div class="quality-card-body">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="flex items-center">
+                                    <i class="fab fa-jira text-sm mr-2" style="color: #f8d167;"></i>
+                                    <p class="text-sm">Jira: Bug tracking</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fab fa-chrome text-sm mr-2" style="color: #f8d167;"></i>
+                                    <p class="text-sm">Selenium: Automated testing</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-bug text-sm mr-2" style="color: #f8d167;"></i>
+                                    <p class="text-sm">OWASP ZAP: Security scanning</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-tachometer-alt text-sm mr-2" style="color: #f8d167;"></i>
+                                    <p class="text-sm">LoadRunner: Performance testing</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="quality-card">
+                        <div class="quality-card-header">
+                            <div class="quality-icon mr-3">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold" style="color: #f8d167;">QA Process</h3>
+                        </div>
+                        <div class="quality-card-body">
+                            <div class="qa-process-icons">
+                                <div class="process-icon-container">
+                                    <div class="process-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="process-name">Quality Planning</div>
+                                </div>
+                                <div class="process-icon-container">
+                                    <div class="process-icon">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div class="process-name">Quality Assurance</div>
+                                </div>
+                                <div class="process-icon-container">
+                                    <div class="process-icon">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <div class="process-name">Quality Control</div>
+                                </div>
+                                <div class="process-icon-container">
+                                    <div class="process-icon">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </div>
+                                    <div class="process-name">Continuous Improvement</div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4 mt-2">
+                                <div class="bg-black bg-opacity-20 p-3 rounded-lg">
+                                    <h4 class="text-sm font-medium mb-1" style="color: #f8d167;">Quality Assurance (QA)</h4>
+                                    <div class="bullet-point">
+                                        <div class="bullet-dot"></div>
+                                        <p class="text-xs">Code reviews by senior developers</p>
+                                    </div>
+                                    <div class="bullet-point">
+                                        <div class="bullet-dot"></div>
+                                        <p class="text-xs">Design and architecture reviews</p>
+                                    </div>
+                                    <div class="bullet-point">
+                                        <div class="bullet-dot"></div>
+                                        <p class="text-xs">Regular security assessments</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-black bg-opacity-20 p-3 rounded-lg">
+                                    <h4 class="text-sm font-medium mb-1" style="color: #f8d167;">Quality Control (QC)</h4>
+                                    <div class="bullet-point">
+                                        <div class="bullet-dot"></div>
+                                        <p class="text-xs">Unit and integration testing</p>
+                                    </div>
+                                    <div class="bullet-point">
+                                        <div class="bullet-dot"></div>
+                                        <p class="text-xs">System and security testing</p>
+                                    </div>
+                                    <div class="bullet-point">
+                                        <div class="bullet-dot"></div>
+                                        <p class="text-xs">Usability testing with end-users</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quality-card">
+                        <div class="quality-card-header">
+                            <div class="quality-icon mr-3">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold" style="color: #f8d167;">Quality Metrics & Baseline</h3>
+                        </div>
+                        <div class="quality-card-body">
+                            <div class="quality-metric">
+                                <div class="quality-icon w-10 h-10">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                </div>
+                                <div class="w-full">
+                                    <div class="flex justify-between mb-1">
+                                        <p class="text-sm font-medium" style="color: #f8d167;">Website Performance</p>
+                                        <p class="text-xs">≤ 2 sec</p>
+                                    </div>
+                                    <p class="text-xs mb-1">Page load time and system uptime ≥ 99.9%</p>
+                                    <div class="quality-progress">
+                                        <div class="quality-progress-bar" style="--fill-width: 92%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="quality-metric">
+                                <div class="quality-icon w-10 h-10">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="w-full">
+                                    <div class="flex justify-between mb-1">
+                                        <p class="text-sm font-medium" style="color: #f8d167;">Security</p>
+                                        <p class="text-xs">OWASP Top 10</p>
+                                    </div>
+                                    <p class="text-xs mb-1">OWASP compliance with no critical vulnerabilities</p>
+                                    <div class="quality-progress">
+                                        <div class="quality-progress-bar" style="--fill-width: 85%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="quality-metric">
+                                <div class="quality-icon w-10 h-10">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="w-full">
+                                    <div class="flex justify-between mb-1">
+                                        <p class="text-sm font-medium" style="color: #f8d167;">Usability</p>
+                                        <p class="text-xs">≥ 4/5 stars</p>
+                                    </div>
+                                    <p class="text-xs mb-1">User satisfaction score and task completion rate ≥ 90%</p>
+                                    <div class="quality-progress">
+                                        <div class="quality-progress-bar" style="--fill-width: 88%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="quality-metric">
+                                <div class="quality-icon w-10 h-10">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="w-full">
+                                    <div class="flex justify-between mb-1">
+                                        <p class="text-sm font-medium" style="color: #f8d167;">Functional Accuracy</p>
+                                        <p class="text-xs">100%</p>
+                                    </div>
+                                    <p class="text-xs mb-1">All test cases pass during system testing</p>
+                                    <div class="quality-progress">
+                                        <div class="quality-progress-bar" style="--fill-width: 95%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 bg-black bg-opacity-20 p-4 rounded-lg" style="animation: fadeIn 1s ease forwards; animation-delay: 1.1s; opacity: 0;">
+                <div class="flex items-center">
+                    <i class="fas fa-lightbulb text-2xl mr-3" style="color: #f8d167;"></i>
+                    <p class="text-sm">Quality is not just tested in, but built into every aspect of the MediAlert system. Our comprehensive approach ensures reliable performance when lives are at stake.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-number">8 / 20</div>
+    </div>
+</body>
+</html>

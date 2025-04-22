@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources & Cost Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .slide {
+            
+            min-height: 950px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #740510 0%, #8a0613 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+            color: white;
+        }
+        .logo-shield {
+            width: 60px;
+            height: 70px;
+            transform: matrix(1.91, 0, 0, 1.91, 0, 0);
+            bottom: -5px !important;
+            left: -16px !important;
+            position: relative !important;
+        }
+        
+        .logo-cross {
+            position: absolute;
+            background-color: #f8d167;
+        }
+        
+        .logo-cross-vertical {
+            width: 7px;
+            height: 35px;
+        }
+        
+        .logo-cross-horizontal {
+            width: 35px;
+            height: 7px;
+        }
+        
+        .header {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px 60px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pattern-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(248, 209, 103, 0.1) 10%, transparent 11%);
+            background-size: 30px 30px;
+            opacity: 0.6;
+            z-index: 1;
+        }
+        
+        .slide-content {
+            padding: 40px 60px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cost-card {
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            overflow: hidden;
+        }
+        
+        .cost-card-header {
+            background-color: rgba(248, 209, 103, 0.15);
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(248, 209, 103, 0.3);
+        }
+        
+        .cost-card-body {
+            padding: 16px;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .cost-card:nth-child(1) { animation-delay: 0.1s; }
+        .cost-card:nth-child(2) { animation-delay: 0.3s; }
+        
+        .resource-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            animation: fadeInLeft 0.5s ease forwards;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        @keyframes fadeInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .resource-item:hover {
+            background-color: rgba(248, 209, 103, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .resource-item:nth-child(1) { animation-delay: 0.1s; }
+        .resource-item:nth-child(2) { animation-delay: 0.15s; }
+        .resource-item:nth-child(3) { animation-delay: 0.2s; }
+        .resource-item:nth-child(4) { animation-delay: 0.25s; }
+        .resource-item:nth-child(5) { animation-delay: 0.3s; }
+        .resource-item:nth-child(6) { animation-delay: 0.35s; }
+        .resource-item:nth-child(7) { animation-delay: 0.4s; }
+        
+        .resource-icon {
+            width: 36px;
+            height: 36px;
+            background-color: rgba(248, 209, 103, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: #f8d167;
+            flex-shrink: 0;
+        }
+        
+        .cost-bar {
+            height: 24px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin-bottom: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .cost-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, rgba(248, 209, 103, 0.8) 0%, rgba(248, 209, 103, 0.4) 100%);
+            border-radius: 12px;
+            width: 0;
+            animation: fillBar 1.5s ease forwards;
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes fillBar {
+            to { width: var(--fill-width); }
+        }
+        
+        .medical-icon {
+            position: absolute;
+            color: rgba(248, 209, 103, 0.1);
+            z-index: 1;
+        }
+        
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .presenter-badge {
+            position: absolute;
+            top: 20px;
+            right: 60px;
+            background-color: rgba(248, 209, 103, 0.2);
+            color: #f8d167;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+            animation-delay: 0.8s;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .highlight {
+            color: #f8d167;
+            font-weight: 600;
+        }
+        
+        .cost-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+        }
+        
+        .cost-table tr {
+            background-color: rgba(255, 255, 255, 0.05);
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+        
+        .cost-table tr:nth-child(1) { animation-delay: 0.6s; }
+        .cost-table tr:nth-child(2) { animation-delay: 0.65s; }
+        .cost-table tr:nth-child(3) { animation-delay: 0.7s; }
+        .cost-table tr:nth-child(4) { animation-delay: 0.75s; }
+        .cost-table tr:nth-child(5) { animation-delay: 0.8s; }
+        .cost-table tr:nth-child(6) { animation-delay: 0.85s; }
+        .cost-table tr:nth-child(7) { animation-delay: 0.9s; }
+        .cost-table tr:nth-child(8) { animation-delay: 0.95s; }
+        
+        .cost-table tr:hover {
+            background-color: rgba(248, 209, 103, 0.15);
+        }
+        
+        .cost-table th, .cost-table td {
+            padding: 10px 16px;
+            text-align: left;
+        }
+        
+        .cost-table th {
+            color: #f8d167;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+        
+        .cost-table td:last-child {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="pattern-bg"></div>
+        
+        <i class="fas fa-coins medical-icon text-9xl" style="top: 120px; right: 150px;"></i>
+        <i class="fas fa-hand-holding-usd medical-icon text-8xl" style="bottom: 160px; right: 180px;"></i>
+        <i class="fas fa-chart-line medical-icon text-8xl" style="bottom: 80px; right: 80px;"></i>
+        
+        <div class="header">
+            <div class="logo-shield">
+                <img src="MediAlert.png" alt="MediAlert Logo" class="object-contain w-full h-full">
+            </div>
+            <h1 class="text-3xl font-bold" style="color: #f8d167;">Resources & Cost Management</h1>
+        </div>
+        
+        <div class="presenter-badge">
+            <i class="fas fa-server mr-2"></i>
+            Presenter: Nathan Xander Lada
+        </div>
+        
+        <div class="slide-content">
+            <div class="grid grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold mb-3" style="color: #f8d167;">Project Team Resources</h3>
+                    
+                    <div class="resource-item">
+                        <div class="resource-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium" style="color: #f8d167;">Jose Raphael R. Lawas</p>
+                            <p class="text-xs opacity-80">Project Manager</p>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium" style="color: #f8d167;">Jessie Noel Lapure</p>
+                            <p class="text-xs opacity-80">Lead Developer</p>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium" style="color: #f8d167;">Carl Austin T. Labuca</p>
+                            <p class="text-xs opacity-80">UI/UX Designer</p>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium" style="color: #f8d167;">Nathan Xander Lada</p>
+                            <p class="text-xs opacity-80">Backend Developer</p>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium" style="color: #f8d167;">John Joseph A. Laborada</p>
+                            <p class="text-xs opacity-80">Frontend Developer</p>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-icon">
+                            <i class="fas fa-check-square"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium" style="color: #f8d167;">Lyrech James E. Laspinas</p>
+                            <p class="text-xs opacity-80">QA Specialist</p>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium" style="color: #f8d167;">Joshua Noel D. Lo</p>
+                            <p class="text-xs opacity-80">Security Consultant</p>
+                        </div>
+                    </div>
+                    
+                    <div class="cost-card mt-6">
+                        <div class="cost-card-header">
+                            <h4 class="font-medium" style="color: #f8d167;">Support Resources</h4>
+                        </div>
+                        <div class="cost-card-body">
+                            <div class="grid grid-cols-1 gap-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-university text-sm mr-2" style="color: #f8d167;"></i>
+                                    <p class="text-sm">Cebu Institute of Technology University - PMO Office</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-laptop text-sm mr-2" style="color: #f8d167;"></i>
+                                    <p class="text-sm">Cebu Institute of Technology University IT Department</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-gavel text-sm mr-2" style="color: #f8d167;"></i>
+                                    <p class="text-sm">Cebu Institute of Technology University Legal Counsel</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-3" style="color: #f8d167;">Project Budget Breakdown</h3>
+                    
+                    <table class="cost-table mb-6">
+                        <thead>
+                            <tr>
+                                <th>Cost Category</th>
+                                <th>Amount (PHP)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Software Licenses</td>
+                                <td>1,000</td>
+                            </tr>
+                            <tr>
+                                <td>Cloud Hosting & Infrastructure</td>
+                                <td>3,000</td>
+                            </tr>
+                            <tr>
+                                <td>Security Tools & Services</td>
+                                <td>2,000</td>
+                            </tr>
+                            <tr>
+                                <td>Consultants/Contractors</td>
+                                <td>5,000</td>
+                            </tr>
+                            <tr>
+                                <td>Personnel Costs</td>
+                                <td>20,000</td>
+                            </tr>
+                            <tr>
+                                <td>Testing Tools/Software</td>
+                                <td>500</td>
+                            </tr>
+                            <tr>
+                                <td>Miscellaneous Supplies</td>
+                                <td>1,000</td>
+                            </tr>
+                            <tr class="font-semibold">
+                                <td style="color: #f8d167;">Contingency Reserve (10%)</td>
+                                <td>3,250</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="cost-card">
+                        <div class="cost-card-header">
+                            <h4 class="font-medium" style="color: #f8d167;">Budget Distribution</h4>
+                        </div>
+                        <div class="cost-card-body">
+                            <div class="mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm">Personnel Costs</span>
+                                    <span class="text-sm">56%</span>
+                                </div>
+                                <div class="cost-bar">
+                                    <div class="cost-bar-fill" style="--fill-width: 56%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm">External Services</span>
+                                    <span class="text-sm">20%</span>
+                                </div>
+                                <div class="cost-bar">
+                                    <div class="cost-bar-fill" style="--fill-width: 20%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm">Infrastructure & Hosting</span>
+                                    <span class="text-sm">15%</span>
+                                </div>
+                                <div class="cost-bar">
+                                    <div class="cost-bar-fill" style="--fill-width: 15%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm">Contingency & Misc</span>
+                                    <span class="text-sm">9%</span>
+                                </div>
+                                <div class="cost-bar">
+                                    <div class="cost-bar-fill" style="--fill-width: 9%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 bg-black bg-opacity-20 p-4 rounded-lg" style="animation: fadeIn 1s ease forwards; animation-delay: 1s; opacity: 0;">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle text-2xl mr-3" style="color: #f8d167;"></i>
+                        <p class="text-sm">Total Project Budget: <span class="font-semibold" style="color: #f8d167;">₱35,750 PHP</span></p>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-exclamation-triangle text-lg mr-2" style="color: #f8d167;"></i>
+                        <p class="text-xs">Cost variance threshold: ±5% | Budget approval: PMO Manager</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-number">6 / 20</div>
+    </div>
+</body>
+</html>

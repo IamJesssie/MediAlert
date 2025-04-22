@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contingency and Risk Response</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .slide {
+            min-height: 930px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #740510 0%, #8a0613 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+            color: white;
+        }
+        
+        .logo-shield {
+            width: 60px;
+            height: 70px;
+            transform: matrix(1.91, 0, 0, 1.91, 0, 0);
+            bottom: -5px !important;
+            left: -16px !important;
+            position: relative !important;
+        }
+        
+        .logo-cross {
+            position: absolute;
+            background-color: #f8d167;
+        }
+        
+        .logo-cross-vertical {
+            width: 7px;
+            height: 35px;
+        }
+        
+        .logo-cross-horizontal {
+            width: 35px;
+            height: 7px;
+        }
+        
+        .header {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px 60px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pattern-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(248, 209, 103, 0.1) 10%, transparent 11%);
+            background-size: 30px 30px;
+            opacity: 0.6;
+            z-index: 1;
+        }
+        
+        .slide-content {
+            padding: 40px 60px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .response-card {
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            border-left: 4px solid #f8d167;
+        }
+        
+        .response-card-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(248, 209, 103, 0.3);
+            background-color: rgba(248, 209, 103, 0.15);
+            display: flex;
+            align-items: center;
+        }
+        
+        .response-card-body {
+            padding: 16px;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .response-card:nth-child(1) { animation-delay: 0.1s; }
+        .response-card:nth-child(2) { animation-delay: 0.2s; }
+        
+        .strategy-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            padding: 12px;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            animation: fadeInRight 0.5s ease forwards;
+            opacity: 0;
+            transform: translateX(20px);
+        }
+        
+        @keyframes fadeInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .strategy-item:hover {
+            background-color: rgba(248, 209, 103, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .strategy-item:nth-child(1) { animation-delay: 0.3s; }
+        .strategy-item:nth-child(2) { animation-delay: 0.4s; }
+        .strategy-item:nth-child(3) { animation-delay: 0.5s; }
+        .strategy-item:nth-child(4) { animation-delay: 0.6s; }
+        
+        .contingency-bar {
+            height: 20px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 8px;
+        }
+        
+        .contingency-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #f8d167 0%, rgba(248, 209, 103, 0.6) 100%);
+            border-radius: 10px;
+            width: 0;
+            animation: progressFill 1.5s ease forwards;
+            animation-delay: 0.7s;
+        }
+        
+        @keyframes progressFill {
+            to { width: 10%; }
+        }
+        
+        .item-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(248, 209, 103, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 14px;
+            color: #f8d167;
+            flex-shrink: 0;
+        }
+        
+        .feature-box {
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            animation: fadeInLeft 0.5s ease forwards;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        @keyframes fadeInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .feature-box:hover {
+            background-color: rgba(248, 209, 103, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .feature-box:nth-child(1) { animation-delay: 0.7s; }
+        .feature-box:nth-child(2) { animation-delay: 0.8s; }
+        .feature-box:nth-child(3) { animation-delay: 0.9s; }
+        
+        .medical-icon {
+            position: absolute;
+            color: rgba(248, 209, 103, 0.1);
+            z-index: 1;
+        }
+        
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .presenter-badge {
+            position: absolute;
+            top: 20px;
+            right: 60px;
+            background-color: rgba(248, 209, 103, 0.2);
+            color: #f8d167;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+            animation-delay: 0.8s;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .highlight {
+            position: relative;
+            right: -16px;
+            color: #f8d167;
+            font-weight: 600;
+        }
+        
+        .risk-diagram {
+            height: 180px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 16px;
+            position: relative;
+            animation: fadeIn 0.8s ease forwards;
+            opacity: 0;
+            animation-delay: 1s;
+        }
+        
+        .risk-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #f8d167;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .risk-circle::before {
+            content: '';
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 2px dashed rgba(248, 209, 103, 0.4);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .risk-bubble {
+            position: absolute;
+            padding: 8px 12px;
+            background-color: rgba(248, 209, 103, 0.2);
+            border: 1px solid #f8d167;
+            color: white;
+            border-radius: 16px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .risk-bubble.avoid {
+            top: 40px;
+            left: 70px;
+            animation-delay: 1.2s;
+        }
+        
+        .risk-bubble.mitigate {
+            top: 100px;
+            right: 70px;
+            animation-delay: 1.4s;
+        }
+        
+        .risk-bubble.transfer {
+            bottom: 40px;
+            left: 70px;
+            animation-delay: 1.6s;
+        }
+        
+        .risk-bubble.accept {
+            bottom: 100px;
+            right: 70px;
+            animation-delay: 1.8s;
+        }
+        
+        .risk-bubble i {
+            margin-right: 5px;
+            color: #f8d167;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="pattern-bg"></div>
+        
+        <i class="fas fa-umbrella medical-icon text-9xl" style="top: 120px; right: 150px;"></i>
+        <i class="fas fa-shield-alt medical-icon text-8xl" style="bottom: 160px; right: 180px;"></i>
+        <i class="fas fa-life-ring medical-icon text-8xl" style="bottom: 80px; right: 80px;"></i>
+        
+        <div class="header">
+            <div class="logo-shield">
+                <img src="MediAlert.png" alt="MediAlert Logo" class="object-contain w-full h-full">
+            </div>
+            <h1 class="text-3xl font-bold" style="color: #f8d167;">Contingency and Risk Response</h1>
+        </div>
+        
+        <div class="presenter-badge">
+            <i class="fas fa-shield-alt mr-2"></i>
+            Presenter: Joshua Noel D. Lo
+        </div>
+        
+        <div class="slide-content">
+            <div class="grid grid-cols-2 gap-6">
+                <div>
+                    <div class="response-card">
+                        <div class="response-card-header">
+                            <div class="item-icon mr-3">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold" style="color: #f8d167;">Contingency Reserve</h3>
+                        </div>
+                        <div class="response-card-body">
+                            <p class="text-sm mb-4">A contingency reserve of PHP 180,900 (approximately 10% of the total project budget) has been established to handle unforeseen costs and risks that may arise during the project.</p>
+                            
+                            <div class="bg-black bg-opacity-20 p-3 rounded-lg mb-4">
+                                <h4 class="text-sm font-medium mb-2" style="color: #f8d167;">Budget Allocation</h4>
+                                <div class="flex items-center justify-between text-xs mb-1">
+                                    <span>Total Project Budget</span>
+                                    <span>PHP 1,720,900</span>
+                                </div>
+                                <div class="flex items-center justify-between text-xs mb-1">
+                                    <span>Contingency Reserve (10%)</span>
+                                    <span class="highlight">PHP 180,900</span>
+                                </div>
+                                <div class="contingency-bar">
+                                    <div class="contingency-progress"></div>
+                                </div>
+                            </div>
+                            
+                            <h4 class="text-sm font-medium mb-2" style="color: #f8d167;">Contingency Usage Guidelines</h4>
+                            <div class="feature-box flex items-center">
+                                <i class="fas fa-check-circle mr-2 text-sm" style="color: #f8d167;"></i>
+                                <p class="text-xs">Requires formal approval from PMO Manager</p>
+                            </div>
+                            <div class="feature-box flex items-center">
+                                <i class="fas fa-check-circle mr-2 text-sm" style="color: #f8d167;"></i>
+                                <p class="text-xs">Used only for identified risks that materialize</p>
+                            </div>
+                            <div class="feature-box flex items-center">
+                                <i class="fas fa-check-circle mr-2 text-sm" style="color: #f8d167;"></i>
+                                <p class="text-xs">Documented in the Risk Register when utilized</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="response-card">
+                        <div class="response-card-header">
+                            <div class="item-icon mr-3">
+                                <i class="fas fa-route"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold" style="color: #f8d167;">Risk Response Strategies</h3>
+                        </div>
+                        <div class="response-card-body">
+                            <div class="strategy-item">
+                                <div class="item-icon">
+                                    <i class="fas fa-ban"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-base font-medium mb-1" style="color: #f8d167;">Avoid</h4>
+                                    <p class="text-xs">Eliminate the threat by removing the cause. For example, removing third-party integrations that pose significant security risks.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="strategy-item">
+                                <div class="item-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-base font-medium mb-1" style="color: #f8d167;">Mitigate</h4>
+                                    <p class="text-xs">Reduce probability or impact to an acceptable threshold. For example, implementing robust security measures to mitigate data breach risks.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="strategy-item">
+                                <div class="item-icon">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-base font-medium mb-1" style="color: #f8d167;">Transfer</h4>
+                                    <p class="text-xs">Shift impact and ownership to a third party. For example, using cloud service providers with robust uptime guarantees.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="strategy-item">
+                                <div class="item-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-base font-medium mb-1" style="color: #f8d167;">Accept</h4>
+                                    <p class="text-xs">Acknowledge risk without taking action, typically for low-impact or highly unlikely risks. Active acceptance may include contingency reserves.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="risk-diagram">
+                                <div class="risk-circle">
+                                    <span class="highlight">Risk Response</span>
+                                </div>
+                                <div class="risk-bubble avoid">
+                                    <i class="fas fa-ban"></i>
+                                    <span>Avoid</span>
+                                </div>
+                                <div class="risk-bubble mitigate">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Mitigate</span>
+                                </div>
+                                <div class="risk-bubble transfer">
+                                    <i class="fas fa-exchange-alt"></i>
+                                    <span>Transfer</span>
+                                </div>
+                                <div class="risk-bubble accept">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Accept</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 bg-black bg-opacity-20 p-4 rounded-lg" style="animation: fadeIn 1s ease forwards; animation-delay: 2s; opacity: 0;">
+                <div class="flex items-center">
+                    <i class="fas fa-lightbulb text-2xl mr-3" style="color: #f8d167;"></i>
+                    <p class="text-sm">Our proactive approach to risk management includes not only identifying risks but also implementing appropriate response strategies and maintaining adequate contingency reserves to address unexpected challenges throughout the project lifecycle.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-number">14 / 20</div>
+    </div>
+</body>
+</html>
